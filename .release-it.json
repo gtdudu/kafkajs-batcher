@@ -1,0 +1,12 @@
+{
+  "git": {
+    "changelog": "git log --pretty=format:\"* (%h) - %s\" ${latestTag}...HEAD",
+    "requireBranch": "main"
+  },
+  "npm": {
+    "publish": "true"
+  },
+  "github": {
+    "release": true
+  }
+}
