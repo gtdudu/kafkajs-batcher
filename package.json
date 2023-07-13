@@ -1,18 +1,30 @@
 {
   "name": "@gtdudu/kafkajs-batcher",
   "version": "1.0.1",
-  "description": "",
+  "description": "Control batch size for kafkajs consumers",
   "author": "tommy durand",
-  "license": "ISC",
+  "license": "MIT",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gtdudu/kafkajs-batcher.git"
+  },
+  "keywords": [
+    "kafkajs",
+    "max.poll.records",
+    "batcher"
+  ],
   "exports": {
     ".": {
       "require": "./dist/index.js",
       "import": "./dist/index.mjs",
       "types": "./dist/index.d.ts"
     }
+  },
+  "bugs": {
+    "url": "https://github.com/gtdudu/kafkajs-batcher/issues"
   },
   "publishConfig": {
     "access": "public"
