@@ -1,0 +1,6 @@
+dist/
+node_modules/
+coverage/
+debug/
+docker/
+.DS_Store

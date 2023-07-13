@@ -1,0 +1,41 @@
+version: "3"
+services:
+  redis:
+    container_name: gtdudu-redis
+    image: redis:latest
+    volumes:
+      - ./docker/redis:/data
+    ports:
+      - "6379:6379"
+      
+  zookeeper:
+    container_name: gtdudu-zookeeper
+    image: 'bitnami/zookeeper:latest'
+    ports:
+      - 2181:2181
+    environment:
+      - ZOO_ENABLE_AUTH=false
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    logging:
+      driver: none
+
+  kafka:
+    container_name: gtdudu-kafka
+    image: 'bitnami/kafka:latest'
+    ports:
+      - 9092:9092
+      - 29092:29092
+    volumes:
+      - ./docker/kafka:/bitnami/kafka
+    environment:
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,PLAINTEXT_HOST://:29092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
+      - KAFKA_CFG_NUM_PARTITIONS=2
+      - KAFKA_CFG_OFFSETS_TOPIC_NUM_PARTITIONS=2
+      - KAFKA_BROKER_ID=1
+    depends_on:
+      - zookeeper
